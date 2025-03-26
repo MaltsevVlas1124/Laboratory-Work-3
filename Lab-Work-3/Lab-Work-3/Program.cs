@@ -5,7 +5,9 @@ using System.Threading;
 
 class Program
 {
-    public static object arrayData = null;
+    public static object? arrayData = null;
+    public static int blockNum;
+
     public static void Main()
     {
         Console.OutputEncoding = Encoding.UTF8;
@@ -27,7 +29,7 @@ class Program
 ");
             Console.Write("Ваш вибір: ");
 
-            if (!int.TryParse(Console.ReadLine(), out int blockNum) || blockNum < 0 || blockNum > 2)
+            if (!int.TryParse(Console.ReadLine(), out blockNum) || blockNum < 0 || blockNum > 2)
             {
                 Console.Clear();
                 WriteColoredLine("Некоректний вибір, спробуйте ще раз.\n", ConsoleColor.Red);
@@ -36,20 +38,102 @@ class Program
 
             switch (blockNum)
             {
-                case 1: Console.Clear(); ArrayInput(blockNum); break;
-                case 2: Console.Clear(); ArrayInput(blockNum); break;
+                case 1: Console.Clear(); ArrayInputChoiceType(); break;
+                case 2: Console.Clear(); ArrayInputChoiceType(); break;
                 case 0: Console.Clear(); Console.WriteLine("Роботу програми завершено."); Environment.Exit(0); break;
             }
         }
     }
-    public static void ArrayInput(int blockNum)
+
+    public static void ArrayInputChoiceType()
     {
-        switch (blockNum)
+        while (true)
         {
-            case 1: arrayData = InputOneDimArray(); Console.Clear(); StudentChoice(blockNum); break;
-            case 2: arrayData = InputTwoDimArray(); Console.Clear(); StudentChoice(blockNum); break;
+            if(blockNum == 1)
+            {
+                Console.WriteLine(@"Оберіть тип введення масиву:
+
+1. Заповнити вручну
+2. Згенерувати випадковим чином:
+
+   Розмір символів: від -100 до 100
+   Кількість символів: від 5 до 20 
+
+0. Повернутися до вибору блоку
+");
+            }
+            else if (blockNum == 2) 
+            {
+                Console.WriteLine(@"Оберіть тип введення масиву:
+
+1. Заповнити вручну
+2. Згенерувати випадковим чином:
+
+   Розмір символів: від -100 до 100
+   Кількість рядків: від 2 до 10
+   Кількість символів в одному рядку: від 5 до 20 
+
+0. Повернутися до вибору блоку
+");
+            }
+            
+            Console.Write("Ваш вибір: ");
+            if (!int.TryParse(Console.ReadLine(), out int inputChoice) || (inputChoice < 0 || inputChoice > 2))
+            {
+                Console.Clear();
+                WriteColoredLine("Некоректний вибір, спробуйте ще раз.\n", ConsoleColor.Red);
+                continue;
+            }
+            switch (inputChoice)
+            {
+                case 1: Console.Clear(); ArrayInput(1); break;
+                case 2: Console.Clear(); ArrayInput(2); break;
+                case 0: Console.Clear(); BlockChoice(); break;
+            }
         }
     }
+
+    public static void ArrayInput(int inputChoice)
+    {
+        switch ((blockNum, inputChoice))
+        {
+            case (1, 1): arrayData = InputOneDimArray(); Console.Clear(); StudentChoice(); break;
+            case (2, 1): arrayData = InputTwoDimArray(); Console.Clear(); StudentChoice(); break;
+            case (1, 2): arrayData = GenereteOneDimArray(); Console.Clear(); StudentChoice(); break;
+            case (2, 2): arrayData = GenerateTwoDimArray(); Console.Clear(); StudentChoice(); break;
+        }
+    }
+    public static object GenereteOneDimArray()
+    {
+        Random random = new Random();
+        int elementsCount = random.Next(5, 21);
+        int[] oneDimArray = new int[elementsCount];
+        for (int i = 0; i < elementsCount; i++)
+        {
+            oneDimArray[i] = random.Next(-100, 101);
+        }
+       return oneDimArray;
+    }
+    public static object GenerateTwoDimArray()
+    {
+        Random random = new Random();
+        int rowsCount = random.Next(2, 11);
+        int[][] twoDimArray = new int[rowsCount][];
+
+        for (int i = 0; i < rowsCount; i++)
+        {
+            int columnsCount = random.Next(5, 21);
+            twoDimArray[i] = new int[columnsCount];
+
+            for (int j = 0; j < columnsCount; j++)
+            {
+                twoDimArray[i][j] = random.Next(-100, 101);
+            }
+        }
+        return twoDimArray;
+    }
+   
+
     static int[] InputOneDimArray()
     {
         int[] oneDimArray;
@@ -70,6 +154,7 @@ class Program
         }
         return oneDimArray;
     }
+
     static int[][] InputTwoDimArray()
     {
         Console.Write("Введіть кількість рядків у масиві: ");
@@ -103,7 +188,7 @@ class Program
         }
         return twoDimArray;
     }
-    public static void StudentChoice(int blockNum)
+    public static void StudentChoice()
     {
             while (true)
         {
@@ -125,35 +210,34 @@ class Program
                 WriteColoredLine("Некоректний вибір, спробуйте ще раз.\n", ConsoleColor.Red);
                 continue;
             }
-            ProcessChoice(choice, blockNum);
+            ProcessChoice(choice);
         }
     }
-
-    public static void ProcessChoice(int choice, int blockNum)
+    public static void ProcessChoice(int choice)
     {
         switch (choice)
         {
             case 1:
                 Console.Clear();
-                MaltsevProgram.Start(blockNum);
+                MaltsevProgram.Start();
                 PressAnyKeyToContinue();
                 break;
 
             case 2:
                 Console.Clear();
-                LavrinenkoProgram.Start(blockNum);
+                //LavrinenkoProgram.Start();
                 PressAnyKeyToContinue();
                 break;
 
             case 3:
                 Console.Clear();
-                KormanProgram.Start(blockNum);
+                //KormanProgram.Start();
                 PressAnyKeyToContinue();
                 break;
 
             case 9: 
                 Console.Clear(); 
-                MassiveStatus(blockNum); 
+                MassiveStatus(); 
                 break;
 
             case 0:
@@ -164,12 +248,11 @@ class Program
 
             default:
                 Console.Clear();
-                Console.WriteLine("Невірний вибір!");
+                WriteColoredLine("Невірний вибір!", ConsoleColor.Red);
                 break;
         }
-    }
-   
-    public static void MassiveStatus(int blockNum)
+    } 
+    public static void MassiveStatus()
     {
         if (blockNum == 1)
         {    
@@ -198,14 +281,12 @@ class Program
         Console.Write(text);
         Console.ForegroundColor = ConsoleColor.White;
     }
-
     public static void WriteColoredLine(string text, ConsoleColor color)
     {
         Console.ForegroundColor = color;
         Console.WriteLine(text);
         Console.ForegroundColor = ConsoleColor.White;
     }
-
     public static void PressAnyKeyToContinue()
     {
         Console.WriteLine("\nНатисніть будь-яку клавішу, щоб продовжити...");
