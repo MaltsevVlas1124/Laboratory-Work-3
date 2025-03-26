@@ -8,9 +8,9 @@ namespace Lab_Work_3
 {
     class MaltsevProgram
     {
-        public static void Start(int blockNum)
+        public static void Start()
         {
-            switch (blockNum)
+            switch (Program.blockNum)
             {
                 case 1: BlockOne(); break;
                 case 2: BlockTwo(); break;
@@ -19,13 +19,13 @@ namespace Lab_Work_3
 
         public static void BlockOne()
         {
-            Console.WriteLine("Одновимірний масив:");
+            Console.WriteLine("Одновимірний масив:\n");
             Console.WriteLine(string.Join(" ", (int[])Program.arrayData));
         }
 
         public static void BlockTwo()
         {
-            Console.WriteLine("Двовимірний масив:");
+            Console.WriteLine("Двовимірний масив:'\n");
             foreach (var row in (int[][])Program.arrayData)
             {
                 Console.WriteLine(string.Join(" ", row));
