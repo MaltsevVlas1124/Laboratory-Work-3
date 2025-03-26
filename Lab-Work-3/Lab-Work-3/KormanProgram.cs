@@ -8,5 +8,9 @@ namespace Lab_Work_3
 {
     class KormanProgram
     {
+        public static void Start()
+        {
+
+        }
     }
 }
