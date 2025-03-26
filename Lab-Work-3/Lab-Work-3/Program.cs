@@ -37,14 +37,17 @@ class Program
         {
             case 1:
                 MaltsevProgram.Start();
+                PressAnyKeyToContinue();
                 break;
 
             case 2:
                 LavrinenkoProgram.Start();
+                PressAnyKeyToContinue();
                 break;
 
             case 3:
                 KormanProgram.Start();
+                PressAnyKeyToContinue();
                 break;
 
             case 0:
@@ -58,6 +61,7 @@ class Program
 
         }
     }
+
     private static void WriteColored(string text, ConsoleColor color)
     {
         Console.ForegroundColor = color;
@@ -71,4 +75,12 @@ class Program
         Console.WriteLine(text);
         Console.ForegroundColor = ConsoleColor.Cyan;
     }
+
+    public static void PressAnyKeyToContinue()
+    {
+        Console.WriteLine("\nНатисніть будь-яку клавішу, щоб продовжити...");
+        Console.ReadKey(true);
+        Console.Clear();
+    }
+
 }
