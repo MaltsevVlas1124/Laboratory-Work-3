@@ -19,10 +19,11 @@ class Program
 ");
             Console.Write("Ваш вибір: ");
 
+
             if (!int.TryParse(Console.ReadLine(), out int choice) || choice < 0 || choice > 3)
             {
                 Console.Clear();
-                Console.WriteLine("Некоректний вибір, спробуйте ще раз.\n");
+                WriteColoredLine("Некоректний вибір, спробуйте ще раз.\n", ConsoleColor.Red);
                 continue;
             }
 
@@ -59,6 +60,20 @@ class Program
                 break;
 
         }
+    }
+
+    private static void WriteColored(string text, ConsoleColor color)
+    {
+        Console.ForegroundColor = color;
+        Console.Write(text);
+        Console.ForegroundColor = ConsoleColor.Cyan;
+    }
+
+    private static void WriteColoredLine(string text, ConsoleColor color)
+    {
+        Console.ForegroundColor = color;
+        Console.WriteLine(text);
+        Console.ForegroundColor = ConsoleColor.Cyan;
     }
 
     public static void PressAnyKeyToContinue()
