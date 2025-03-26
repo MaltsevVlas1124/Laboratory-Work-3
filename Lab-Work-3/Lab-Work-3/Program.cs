@@ -36,14 +36,17 @@ class Program
         {
             case 1:
                 MaltsevProgram.Start();
+                PressAnyKeyToContinue();
                 break;
 
             case 2:
                 LavrinenkoProgram.Start();
+                PressAnyKeyToContinue();
                 break;
 
             case 3:
-                KormanProgram.cs.Start();
+                KormanProgram.Start();
+                PressAnyKeyToContinue();
                 break;
 
             case 0:
@@ -57,4 +60,12 @@ class Program
 
         }
     }
+
+    public static void PressAnyKeyToContinue()
+    {
+        Console.WriteLine("\nНатисніть будь-яку клавішу, щоб продовжити...");
+        Console.ReadKey(true);
+        Console.Clear();
+    }
+
 }
