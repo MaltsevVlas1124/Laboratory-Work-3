@@ -86,105 +86,13 @@ class Program
             }
             switch (inputChoice)
             {
-                case 1: Console.Clear(); ArrayInput(1); break;
-                case 2: Console.Clear(); ArrayInput(2); break;
+                case 1: Console.Clear(); ArrayProcessing.ArrayInput(1); break;
+                case 2: Console.Clear(); ArrayProcessing.ArrayInput(2); break;
                 case 0: Console.Clear(); BlockChoice(); break;
             }
         }
     }
-
-    public static void ArrayInput(int inputChoice)
-    {
-        switch ((blockNum, inputChoice))
-        {
-            case (1, 1): arrayData = InputOneDimArray(); Console.Clear(); StudentChoice(); break;
-            case (2, 1): arrayData = InputTwoDimArray(); Console.Clear(); StudentChoice(); break;
-            case (1, 2): arrayData = GenereteOneDimArray(); Console.Clear(); MassiveStatus(); StudentChoice(); break;
-            case (2, 2): arrayData = GenerateTwoDimArray(); Console.Clear(); MassiveStatus(); StudentChoice(); break;
-        }
-    }
-    public static object GenereteOneDimArray()
-    {
-        Random random = new Random();
-        int elementsCount = random.Next(5, 21);
-        int[] oneDimArray = new int[elementsCount];
-        for (int i = 0; i < elementsCount; i++)
-        {
-            oneDimArray[i] = random.Next(-100, 101);
-        }
-       return oneDimArray;
-    }
-    public static object GenerateTwoDimArray()
-    {
-        Random random = new Random();
-        int rowsCount = random.Next(2, 11);
-        int[][] twoDimArray = new int[rowsCount][];
-
-        for (int i = 0; i < rowsCount; i++)
-        {
-            int columnsCount = random.Next(5, 21);
-            twoDimArray[i] = new int[columnsCount];
-
-            for (int j = 0; j < columnsCount; j++)
-            {
-                twoDimArray[i][j] = random.Next(-100, 101);
-            }
-        }
-        return twoDimArray;
-    }
-
-    static int[] InputOneDimArray()
-    {
-        int[] oneDimArray;
-        while (true)
-        {
-            Console.Write("Введіть масив через пробіл: ");
-            string input = Console.ReadLine();
-            if(input == null)
-            {
-                WriteColoredLine("Масив пустий, обробка неможлива. Спробуйте ще раз.\n", ConsoleColor.Red);
-                continue;
-            }
-            try
-            {
-                oneDimArray = input.Split(' ').Select(int.Parse).ToArray();
-                break;
-            }
-            catch
-            {
-                Console.Clear();
-                WriteColoredLine("Некоректний ввід, спробуйте ще раз.\n", ConsoleColor.Red);
-            }
-        }
-        return oneDimArray;
-    }
-
-    static int[][] InputTwoDimArray()
-    {
-        Console.Write("Введіть кількість рядків у масиві: ");
-        if (!int.TryParse(Console.ReadLine(), out int rowsCount))
-        {
-            WriteColoredLine("Некоректний ввід, спробуйте ще раз.\n", ConsoleColor.Red);
-            return InputTwoDimArray();
-        }
-
-        int[][] twoDimArray = new int[rowsCount][];
-        for (int i = 0; i < rowsCount; i++)
-        {
-            Console.WriteLine($"\nВведіть елементи для рядка {i + 1} через пробіл:");
-            string input = Console.ReadLine();
-            try
-            {
-                twoDimArray[i] = Array.ConvertAll(input.Split(" \t".ToCharArray(), StringSplitOptions.RemoveEmptyEntries), int.Parse);
-            }
-            catch
-            {
-                WriteColoredLine("Некоректний ввід, спробуйте ще раз.\n", ConsoleColor.Red);
-                i--;
-            }
-        }
-        return twoDimArray;
-    }
+   
     public static void StudentChoice()
     {
             while (true)
