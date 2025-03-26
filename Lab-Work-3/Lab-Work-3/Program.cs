@@ -7,7 +7,6 @@ class Program
 {
     public static object? arrayData = null;
     public static int blockNum;
-
     public static void Main()
     {
         Console.OutputEncoding = Encoding.UTF8;
@@ -131,7 +130,6 @@ class Program
             case 2:
                 Console.Clear();
                 LavrinenkoProgram.Start();
-                PressAnyKeyToContinue();
                 break;
 
             case 3:
@@ -142,7 +140,7 @@ class Program
 
             case 9: 
                 Console.Clear(); 
-                MassiveStatus(); 
+                ArrayStatus(); 
                 break;
 
             case 0:
@@ -156,7 +154,7 @@ class Program
                 break;
         }
     }
-    public static void MassiveStatus()
+    public static void ArrayStatus()
     {
         switch (blockNum)
         {
