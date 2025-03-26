@@ -8,6 +8,9 @@ namespace Lab_Work_3
 {
     class MaltsevProgram
     {
+        public static void Start()
+        {
 
+        }
     }
 }
