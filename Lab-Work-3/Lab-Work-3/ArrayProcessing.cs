@@ -14,8 +14,8 @@ namespace Lab_Work_3
             {
                 case (1, 1): Program.arrayData = InputOneDimArray(); Console.Clear(); Program.StudentChoice(); break;
                 case (2, 1): Program.arrayData = InputTwoDimArray(); Console.Clear(); Program.StudentChoice(); break;
-                case (1, 2): Program.arrayData = GenereteOneDimArray(); Console.Clear(); Program.MassiveStatus(); Program.StudentChoice(); break;
-                case (2, 2): Program.arrayData = GenerateTwoDimArray(); Console.Clear(); Program.MassiveStatus(); Program.StudentChoice(); break;
+                case (1, 2): Program.arrayData = GenereteOneDimArray(); Console.Clear(); Program.ArrayStatus(); Program.StudentChoice(); break;
+                case (2, 2): Program.arrayData = GenerateTwoDimArray(); Console.Clear(); Program.ArrayStatus(); Program.StudentChoice(); break;
             }   
         }
         public static object GenereteOneDimArray()
@@ -57,6 +57,7 @@ namespace Lab_Work_3
                 string input = Console.ReadLine();
                 if (input == null)
                 {
+                    Console.Clear();
                     Program.WriteColoredLine("Масив пустий, обробка неможлива. Спробуйте ще раз.\n", ConsoleColor.Red);
                     continue;
                 }
@@ -77,8 +78,9 @@ namespace Lab_Work_3
         static int[][] InputTwoDimArray()
         {
             Console.Write("Введіть кількість рядків у масиві: ");
-            if (!int.TryParse(Console.ReadLine(), out int rowsCount))
+            if (!int.TryParse(Console.ReadLine(), out int rowsCount) || rowsCount < 0)
             {
+                Console.Clear();
                 Program.WriteColoredLine("Некоректний ввід, спробуйте ще раз.\n", ConsoleColor.Red);
                 return InputTwoDimArray();
             }
@@ -94,6 +96,7 @@ namespace Lab_Work_3
                 }
                 catch
                 {
+                    Console.Clear();
                     Program.WriteColoredLine("Некоректний ввід, спробуйте ще раз.\n", ConsoleColor.Red);
                     i--;
                 }
