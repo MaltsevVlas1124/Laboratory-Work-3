@@ -53,7 +53,7 @@ class Program
             {
                 Console.WriteLine(@"Оберіть тип введення масиву:
 
-1. Заповнити вручну
+1. Заповнити вручну (через пробіл)
 2. Згенерувати випадковим чином:
 
    Розмір символів: від -100 до 100
@@ -66,7 +66,7 @@ class Program
             {
                 Console.WriteLine(@"Оберіть тип введення масиву:
 
-1. Заповнити вручну
+1. Заповнити вручну (через пробіл)
 2. Згенерувати випадковим чином:
 
    Розмір символів: від -100 до 100
@@ -99,8 +99,8 @@ class Program
         {
             case (1, 1): arrayData = InputOneDimArray(); Console.Clear(); StudentChoice(); break;
             case (2, 1): arrayData = InputTwoDimArray(); Console.Clear(); StudentChoice(); break;
-            case (1, 2): arrayData = GenereteOneDimArray(); Console.Clear(); StudentChoice(); break;
-            case (2, 2): arrayData = GenerateTwoDimArray(); Console.Clear(); StudentChoice(); break;
+            case (1, 2): arrayData = GenereteOneDimArray(); Console.Clear(); MassiveStatus(); StudentChoice(); break;
+            case (2, 2): arrayData = GenerateTwoDimArray(); Console.Clear(); MassiveStatus(); StudentChoice(); break;
         }
     }
     public static object GenereteOneDimArray()
@@ -132,7 +132,6 @@ class Program
         }
         return twoDimArray;
     }
-   
 
     static int[] InputOneDimArray()
     {
@@ -141,6 +140,11 @@ class Program
         {
             Console.Write("Введіть масив через пробіл: ");
             string input = Console.ReadLine();
+            if(input == null)
+            {
+                WriteColoredLine("Масив пустий, обробка неможлива. Спробуйте ще раз.\n", ConsoleColor.Red);
+                continue;
+            }
             try
             {
                 oneDimArray = input.Split(' ').Select(int.Parse).ToArray();
@@ -169,13 +173,6 @@ class Program
         {
             Console.WriteLine($"\nВведіть елементи для рядка {i + 1} через пробіл:");
             string input = Console.ReadLine();
-            if (input == null)
-            {
-                WriteColoredLine("Некоректний ввід, спробуйте ще раз.\n", ConsoleColor.Red);
-                i--;
-                continue;
-            }
-
             try
             {
                 twoDimArray[i] = Array.ConvertAll(input.Split(" \t".ToCharArray(), StringSplitOptions.RemoveEmptyEntries), int.Parse);
@@ -200,7 +197,7 @@ class Program
 
 9. Вивести статус масиву
 
-0. Повернутися до вибору блоку
+0. Повернутися до вибору типу введення
 ");
             Console.Write("Ваш вибір: ");
 
@@ -225,13 +222,13 @@ class Program
 
             case 2:
                 Console.Clear();
-                //LavrinenkoProgram.Start();
+                LavrinenkoProgram.Start();
                 PressAnyKeyToContinue();
                 break;
 
             case 3:
                 Console.Clear();
-                //KormanProgram.Start();
+                KormanProgram.Start();
                 PressAnyKeyToContinue();
                 break;
 
@@ -242,8 +239,7 @@ class Program
 
             case 0:
                 Console.Clear();
-                Console.WriteLine("Роботу програми завершено.");
-                Environment.Exit(0);
+                ArrayInputChoiceType();
                 break;
 
             default:
@@ -251,28 +247,32 @@ class Program
                 WriteColoredLine("Невірний вибір!", ConsoleColor.Red);
                 break;
         }
-    } 
+    }
     public static void MassiveStatus()
     {
-        if (blockNum == 1)
-        {    
-            Console.WriteLine("Вигляд одновимірного масиву:\n");
-            Console.WriteLine(string.Join(" ", (int[])Program.arrayData));
-            PressAnyKeyToContinue();
-        }
-        else if (blockNum == 2)
+        switch (blockNum)
         {
-            Console.WriteLine("Вигляд двовимірного масиву:\n");
-            foreach (var row in (int[][])Program.arrayData)
-            {
-                Console.WriteLine(string.Join(" ", row));
-            }
-            PressAnyKeyToContinue();
-        }
-        else
-        {
-            WriteColoredLine("Невірний вибір!", ConsoleColor.Red);
-            PressAnyKeyToContinue();
+            case 1:
+                Console.WriteLine("Вигляд одновимірного масиву:\n");
+                Console.WriteLine(string.Join(" ", (int[])Program.arrayData));
+                PressAnyKeyToContinue();
+                break;
+
+            case 2:
+                int i = 1;
+                Console.WriteLine("Вигляд двовимірного масиву:\n");
+                foreach (var row in (int[][])Program.arrayData)
+                {
+                    Console.Write($"{i++}) ");
+                    Console.WriteLine(string.Join(" ", row));
+                }
+                PressAnyKeyToContinue();
+                break;
+
+            default:
+                WriteColoredLine("Невірний вибір!", ConsoleColor.Red);
+                PressAnyKeyToContinue();
+                break;
         }
     }
     public static void WriteColored(string text, ConsoleColor color)
@@ -289,7 +289,7 @@ class Program
     }
     public static void PressAnyKeyToContinue()
     {
-        Console.WriteLine("\nНатисніть будь-яку клавішу, щоб продовжити...");
+        Console.Write("\nНатисніть будь-яку клавішу, щоб продовжити...");
         Console.ReadKey(true);
         Console.Clear();
     }
