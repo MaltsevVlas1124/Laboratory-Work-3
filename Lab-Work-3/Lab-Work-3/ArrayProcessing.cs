@@ -73,7 +73,7 @@ namespace Lab_Work_3
                 }
                 try
                 {
-                    oneDimArray = input.Split(' ').Select(int.Parse).ToArray();
+                    oneDimArray = input.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
                     break;
                 }
                 catch
@@ -84,7 +84,7 @@ namespace Lab_Work_3
             }
             return oneDimArray;
         }
-        // Метод введення двовимірного масиву
+        // Метод введення двовимірного масиву  
         static int[][] InputTwoDimArray()
         {
             Console.Write("Введіть кількість рядків у масиві: ");
@@ -102,7 +102,7 @@ namespace Lab_Work_3
                 string input = Console.ReadLine();
                 try
                 {
-                    twoDimArray[i] = Array.ConvertAll(input.Split(" \t".ToCharArray(), StringSplitOptions.RemoveEmptyEntries), int.Parse);
+                    twoDimArray[i] = Array.ConvertAll(input.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries), int.Parse);
                 }
                 catch
                 {

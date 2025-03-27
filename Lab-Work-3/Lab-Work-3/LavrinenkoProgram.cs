@@ -163,7 +163,7 @@ namespace Lab_Work_3
                     Console.WriteLine($"Введіть рядок {i + 1} (розділяйте числа пробілами):");
                     try
                     {
-                        newRows[i] = Array.ConvertAll(Console.ReadLine().Split(new char[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries), int.Parse);
+                        newRows[i] = Array.ConvertAll(Console.ReadLine().Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries), int.Parse);
                         break;
                     }
                     catch
