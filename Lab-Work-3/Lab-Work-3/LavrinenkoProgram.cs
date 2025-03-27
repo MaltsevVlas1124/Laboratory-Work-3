@@ -100,13 +100,78 @@ namespace Lab_Work_3
             return count;
         }
 
-        //Метод-заглушка
+        
         private static void DoBlock_2()
         {
+            int[][] jaggedArray = (int[][])Program.arrayData;
+            ProcessEmptyRows(jaggedArray);
+            Console.Clear();
             Program.ArrayStatus();
         }
 
-        
-        
+        private static void ProcessEmptyRows(int[][] jaggedArray)
+        {
+            int k;
+            while (true)
+            {
+                Console.WriteLine("Скільки рядків додати на початок?");
+                if (!int.TryParse(Console.ReadLine(), out k))
+                {
+                    Console.Clear();
+                    Program.WriteColoredLine("Некоректний ввід, спробуйте ще раз.\n", ConsoleColor.Red);
+                    continue;
+                }
+                break;
+            }
+            int[][] newRows = new int[k][];
+            for (int i = 0; i < k; i++)
+            {
+                Console.Clear();
+                while (true)
+                {
+                    Console.WriteLine($"Введіть рядок {i + 1} (розділяйте числа пробілами):");
+                    try
+                    {
+                        newRows[i] = Array.ConvertAll(Console.ReadLine().Split(" \t".ToCharArray()), int.Parse);
+                        break;
+                    }
+                    catch
+                    {
+                        Console.Clear();
+                        Program.WriteColoredLine("Некоректний ввід, спробуйте ще раз.\n", ConsoleColor.Red);
+                        continue;
+                    }
+                }
+            }
+            // Вставляємо нові рядки на початок масиву
+            int[][] result = InsertKRowsAtTop(jaggedArray, newRows);
+            // Оновлюємо глобальний масив
+            Program.arrayData = result;
+        }
+
+        //Метод вставки К рядків наперед 
+        private static int[][] InsertKRowsAtTop(int[][] originalArray, int[][] rowsToInsert)
+        {
+            int originalLength = originalArray.Length;
+            int rowsToInsertCount = rowsToInsert.Length;
+
+            int[][] result = new int[originalLength + rowsToInsertCount][];
+
+            // Спочатку додаємо нові рядки
+            for (int i = 0; i < rowsToInsertCount; i++)
+            {
+                result[i] = rowsToInsert[i];
+            }
+
+            // Потім копіюємо оригінальні рядки
+            for (int i = 0; i < originalLength; i++)
+            {
+                result[i + rowsToInsertCount] = originalArray[i];
+            }
+
+            return result;
+        }
+
+
     }
 }
