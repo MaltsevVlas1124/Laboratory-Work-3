@@ -17,7 +17,7 @@ namespace Lab_Work_3
                 case (2, 1): Program.arrayData = InputTwoDimArray(); Console.Clear(); Program.StudentChoice(); break;
                 case (1, 2): Program.arrayData = GenereteOneDimArray(); Console.Clear(); Program.ArrayStatus(); Program.StudentChoice(); break;
                 case (2, 2): Program.arrayData = GenerateTwoDimArray(); Console.Clear(); Program.ArrayStatus(); Program.StudentChoice(); break;
-            }   
+            }
         }
         // Метод генерації одновимірного масиву
         public static object GenereteOneDimArray()
@@ -65,7 +65,7 @@ namespace Lab_Work_3
             {
                 Console.Write("Введіть масив через пробіл: ");
                 string input = Console.ReadLine();
-                if (input == null)
+                if (string.IsNullOrWhiteSpace(input))
                 {
                     Console.Clear();
                     Program.WriteColoredLine("Масив пустий, обробка неможлива. Спробуйте ще раз.\n", ConsoleColor.Red);
@@ -100,6 +100,13 @@ namespace Lab_Work_3
             {
                 Console.WriteLine($"\nВведіть елементи для рядка {i + 1} через пробіл:");
                 string input = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(input))
+                {
+                    Console.Clear();
+                    Program.WriteColoredLine("Рядок пустий, спробуйте ще раз.\n", ConsoleColor.Red);
+                    i--;
+                    continue;
+                }
                 try
                 {
                     twoDimArray[i] = Array.ConvertAll(input.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries), int.Parse);
