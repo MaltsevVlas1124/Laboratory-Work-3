@@ -16,20 +16,60 @@ namespace Lab_Work_3
                 case 2: BlockTwo(); break;
             }
         }
-
-        public static void BlockOne()
+        private static void BlockOne()
         {
-            Console.WriteLine("Одновимірний масив:\n");
-            Console.WriteLine(string.Join(" ", (int[])Program.arrayData));
+            int[] input = (int[])Program.arrayData;
+            Program.arrayData = AddOneBecomePositive(input);
+            Program.ArrayStatus();
         }
 
-        public static void BlockTwo()
+        private static int[] AddOneBecomePositive(int[] arr)
         {
-            Console.WriteLine("Двовимірний масив:'\n");
-            foreach (var row in (int[][])Program.arrayData)
+            int positiveCount = 0;
+            foreach (int x in arr)
             {
-                Console.WriteLine(string.Join(" ", row));
+                if (x > 0)
+                {
+                    positiveCount++;
+                }
             }
+            int newSize = arr.Length + positiveCount;
+            int[] newArr = new int[newSize];
+            int newIndex = 0;
+            foreach (int item in arr)
+            {
+                if (item > 0)
+                {
+                    newArr[newIndex] = 1;
+                    newIndex++;
+                }
+                newArr[newIndex] = item;
+                newIndex++;
+            }
+            return newArr;
         }
+        private static void BlockTwo()
+        {
+            int[][] matrix = (int[][])Program.arrayData;
+            Program.arrayData = RemoveEmptyRows(matrix);
+            Program.ArrayStatus();
+        }
+        private static int[][] RemoveEmptyRows(int[][] matrix)
+        {
+            return matrix.Where(row => row != null && row.Length > 0).ToArray();
+        }
+
+        //public static int[][] RemoveEmptyRows(int[][] matrix)
+        //{
+        //    List<int[]> result = new List<int[]>();
+        //    foreach (int[] row in matrix)
+        //    {
+        //        if (row != null && row.Length > 0)
+        //        {
+        //            result.Add(row);
+        //        }
+        //    }
+        //    return result.ToArray();
+        //}
     }
 }
