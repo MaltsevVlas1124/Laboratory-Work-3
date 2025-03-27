@@ -86,6 +86,7 @@ namespace Lab_Work_3
 
             int[][] matrix = (int[][])Program.arrayData;
             Program.arrayData = RemoveRowsContainingZero(matrix);
+            Program.ArrayStatus();
         }
 
         public static int[][] RemoveRowsContainingZero(int[][] matrix)
@@ -99,7 +100,7 @@ namespace Lab_Work_3
 
             foreach (var row in matrix)
             {
-                if (!row.Contains(0))
+                if (row == null || row.Length == 0 || !row.Contains(0))
                 {
                     result.Add(row);
                 }
@@ -107,5 +108,6 @@ namespace Lab_Work_3
 
             return result.ToArray();
         }
+
     }
 }
