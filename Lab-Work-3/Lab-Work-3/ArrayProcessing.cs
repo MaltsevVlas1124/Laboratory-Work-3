@@ -37,6 +37,13 @@ namespace Lab_Work_3
 
             for (int i = 0; i < rowsCount; i++)
             {
+                // 20% шанс створення порожнього рядка
+                if (random.Next(0, 100) < 20)
+                {
+                    twoDimArray[i] = null;
+                    continue;
+                }
+
                 int columnsCount = random.Next(5, 21);
                 twoDimArray[i] = new int[columnsCount];
 
