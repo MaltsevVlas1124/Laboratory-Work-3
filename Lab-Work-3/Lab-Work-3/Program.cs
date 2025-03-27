@@ -15,7 +15,7 @@ class Program
         Console.ForegroundColor = ConsoleColor.White;
         BlockChoice();
     }
-
+    // Метод вибору блоку для виконання
     public static void BlockChoice()
     {
         while (true)
@@ -40,11 +40,11 @@ class Program
             {
                 case 1: Console.Clear(); ArrayInputChoiceType(); break;
                 case 2: Console.Clear(); ArrayInputChoiceType(); break;
-                case 0: Console.Clear(); Console.WriteLine("Роботу програми завершено."); Environment.Exit(0); break;
+                case 0: Console.Clear(); Console.WriteLine("Роботу програми завершено."); Thread.Sleep(1500); Environment.Exit(0); break;
             }
         }
     }
-
+    // Метод вибору типу введення масиву
     public static void ArrayInputChoiceType()
     {
         while (true)
@@ -53,28 +53,28 @@ class Program
             {
                 Console.WriteLine(@"Оберіть тип введення масиву:
 
-    1. Заповнити вручну (через пробіл)
-    2. Згенерувати випадковим чином:
+1. Заповнити вручну (через пробіл)
+2. Згенерувати випадковим чином:
 
-       Розмір символів: від -100 до 100
-       Кількість символів: від 5 до 20 
+   Розмір символів: від -100 до 100
+   Кількість символів: від 5 до 20 
 
-    0. Повернутися до вибору блоку
-    ");
+0. Повернутися до вибору блоку
+");
             }
             else if (blockNum == 2)
             {
                 Console.WriteLine(@"Оберіть тип введення масиву:
 
-    1. Заповнити вручну (через пробіл)
-    2. Згенерувати випадковим чином:
+1. Заповнити вручну (через пробіл)
+2. Згенерувати випадковим чином:
 
-       Розмір символів: від -100 до 100
-       Кількість рядків: від 2 до 10
-       Кількість символів в одному рядку: від 0 до 20 (20% шанс створення пустого рядка)
+   Розмір символів: від -100 до 100
+   Кількість рядків: від 2 до 10
+   Кількість символів в одному рядку: від 0 до 20 (20% шанс створення пустого рядка)
 
-    0. Повернутися до вибору блоку
-    ");
+0. Повернутися до вибору блоку
+");
             }
 
             Console.Write("Ваш вибір: ");
@@ -92,7 +92,7 @@ class Program
             }
         }
     }
-
+    // Метод вибору студентського варіанту
     public static void StudentChoice()
     {
         while (true)
@@ -118,7 +118,7 @@ class Program
             ProcessChoice(choice);
         }
     }
-
+    // Метод обробки вибору студентського варіанту
     public static void ProcessChoice(int choice)
     {
         switch (choice)
@@ -155,7 +155,7 @@ class Program
                 break;
         }
     }
-
+    // Метод виведення статусу масиву
     public static void ArrayStatus()
     {
         switch (blockNum)

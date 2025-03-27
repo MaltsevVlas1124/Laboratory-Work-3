@@ -18,27 +18,30 @@ namespace Lab_Work_3
         }
         private static void BlockOne()
         {
+            Console.WriteLine("--- Завдання блоку 1, варіант 16 ---\n");
+            Console.WriteLine("Додавання '1' перед кожним парним елементом.\n");
+
             int[] input = (int[])Program.arrayData;
-            Program.arrayData = AddOneBecomePositive(input);
+            Program.arrayData = AddOneBeforeEven(input);
             Program.ArrayStatus();
         }
 
-        private static int[] AddOneBecomePositive(int[] arr)
+        private static int[] AddOneBeforeEven(int[] arr)
         {
-            int positiveCount = 0;
+            int evenCount = 0;
             foreach (int x in arr)
             {
-                if (x > 0)
+                if (x % 2 == 0)
                 {
-                    positiveCount++;
+                    evenCount++;
                 }
             }
-            int newSize = arr.Length + positiveCount;
+            int newSize = arr.Length + evenCount;
             int[] newArr = new int[newSize];
             int newIndex = 0;
             foreach (int item in arr)
             {
-                if (item > 0)
+                if (item % 2 == 0)
                 {
                     newArr[newIndex] = 1;
                     newIndex++;
@@ -50,6 +53,9 @@ namespace Lab_Work_3
         }
         private static void BlockTwo()
         {
+            Console.WriteLine("--- Завдання блоку 2, варіант 7 ---\n");
+            Console.WriteLine("Знищування всіх порожніх рядків\n");
+
             int[][] matrix = (int[][])Program.arrayData;
             Program.arrayData = RemoveEmptyRows(matrix);
             Program.ArrayStatus();
