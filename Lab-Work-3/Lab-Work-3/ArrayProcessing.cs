@@ -8,6 +8,7 @@ namespace Lab_Work_3
 {
     class ArrayProcessing
     {
+        // Метод обробки вибору типу введення масиву
         public static void ArrayInput(int inputChoice)
         {
             switch ((Program.blockNum, inputChoice))
@@ -18,6 +19,7 @@ namespace Lab_Work_3
                 case (2, 2): Program.arrayData = GenerateTwoDimArray(); Console.Clear(); Program.ArrayStatus(); Program.StudentChoice(); break;
             }   
         }
+        // Метод генерації одновимірного масиву
         public static object GenereteOneDimArray()
         {
             Random random = new Random();
@@ -29,6 +31,7 @@ namespace Lab_Work_3
             }
             return oneDimArray;
         }
+        // Метод генерації двовимірного масиву
         public static object GenerateTwoDimArray()
         {
             Random random = new Random();
@@ -37,6 +40,13 @@ namespace Lab_Work_3
 
             for (int i = 0; i < rowsCount; i++)
             {
+                // 20% шанс створення порожнього рядка
+                if (random.Next(0, 100) < 20)
+                {
+                    twoDimArray[i] = null;
+                    continue;
+                }
+
                 int columnsCount = random.Next(5, 21);
                 twoDimArray[i] = new int[columnsCount];
 
@@ -47,7 +57,7 @@ namespace Lab_Work_3
             }
             return twoDimArray;
         }
-
+        // Метод введення одновимірного масиву
         static int[] InputOneDimArray()
         {
             int[] oneDimArray;
@@ -63,7 +73,7 @@ namespace Lab_Work_3
                 }
                 try
                 {
-                    oneDimArray = input.Split(' ').Select(int.Parse).ToArray();
+                    oneDimArray = input.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
                     break;
                 }
                 catch
@@ -74,7 +84,7 @@ namespace Lab_Work_3
             }
             return oneDimArray;
         }
-
+        // Метод введення двовимірного масиву  
         static int[][] InputTwoDimArray()
         {
             Console.Write("Введіть кількість рядків у масиві: ");
@@ -92,7 +102,7 @@ namespace Lab_Work_3
                 string input = Console.ReadLine();
                 try
                 {
-                    twoDimArray[i] = Array.ConvertAll(input.Split(" \t".ToCharArray(), StringSplitOptions.RemoveEmptyEntries), int.Parse);
+                    twoDimArray[i] = Array.ConvertAll(input.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries), int.Parse);
                 }
                 catch
                 {

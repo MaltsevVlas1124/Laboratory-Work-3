@@ -15,6 +15,7 @@ class Program
         Console.ForegroundColor = ConsoleColor.White;
         BlockChoice();
     }
+    // Метод вибору блоку для виконання
     public static void BlockChoice()
     {
         while (true)
@@ -39,16 +40,16 @@ class Program
             {
                 case 1: Console.Clear(); ArrayInputChoiceType(); break;
                 case 2: Console.Clear(); ArrayInputChoiceType(); break;
-                case 0: Console.Clear(); Console.WriteLine("Роботу програми завершено."); Environment.Exit(0); break;
+                case 0: Console.Clear(); Console.WriteLine("Роботу програми завершено."); Thread.Sleep(1500); Environment.Exit(0); break;
             }
         }
     }
-
+    // Метод вибору типу введення масиву
     public static void ArrayInputChoiceType()
     {
         while (true)
         {
-            if(blockNum == 1)
+            if (blockNum == 1)
             {
                 Console.WriteLine(@"Оберіть тип введення масиву:
 
@@ -61,7 +62,7 @@ class Program
 0. Повернутися до вибору блоку
 ");
             }
-            else if (blockNum == 2) 
+            else if (blockNum == 2)
             {
                 Console.WriteLine(@"Оберіть тип введення масиву:
 
@@ -70,12 +71,12 @@ class Program
 
    Розмір символів: від -100 до 100
    Кількість рядків: від 2 до 10
-   Кількість символів в одному рядку: від 5 до 20 
+   Кількість символів в одному рядку: від 0 до 20 (20% шанс створення пустого рядка)
 
 0. Повернутися до вибору блоку
 ");
             }
-            
+
             Console.Write("Ваш вибір: ");
             if (!int.TryParse(Console.ReadLine(), out int inputChoice) || (inputChoice < 0 || inputChoice > 2))
             {
@@ -91,16 +92,16 @@ class Program
             }
         }
     }
-   
+    // Метод вибору студентського варіанту
     public static void StudentChoice()
     {
-            while (true)
+        while (true)
         {
             Console.WriteLine(@"Оберіть дію:
 
-1. Виконати файл Мальцева Власа
-2. Виконати файл Лавріненко Олександри
-3. Виконати файл Кормана Романа
+1. Виконати варіант Мальцева Власа
+2. Виконати варіант Лавріненко Олександри
+3. Виконати варіант Кормана Романа
 
 9. Вивести статус масиву
 
@@ -117,6 +118,7 @@ class Program
             ProcessChoice(choice);
         }
     }
+    // Метод обробки вибору студентського варіанту
     public static void ProcessChoice(int choice)
     {
         switch (choice)
@@ -124,7 +126,6 @@ class Program
             case 1:
                 Console.Clear();
                 MaltsevProgram.Start();
-                PressAnyKeyToContinue();
                 break;
 
             case 2:
@@ -135,12 +136,11 @@ class Program
             case 3:
                 Console.Clear();
                 KormanProgram.Start();
-                PressAnyKeyToContinue();
                 break;
 
-            case 9: 
-                Console.Clear(); 
-                ArrayStatus(); 
+            case 9:
+                Console.Clear();
+                ArrayStatus();
                 break;
 
             case 0:
@@ -148,12 +148,14 @@ class Program
                 ArrayInputChoiceType();
                 break;
 
-            default:
+
+            default: // Рудимент коду. Залишено "про всяк випадок"
                 Console.Clear();
                 WriteColoredLine("Невірний вибір!", ConsoleColor.Red);
                 break;
         }
     }
+    // Метод виведення статусу масиву
     public static void ArrayStatus()
     {
         switch (blockNum)
@@ -167,32 +169,44 @@ class Program
             case 2:
                 int i = 1;
                 Console.WriteLine("Вигляд двовимірного масиву:\n");
-                foreach (var row in (int[][])Program.arrayData)
+                foreach (var row in (int[][])Program.arrayData ?? Array.Empty<int[]>())
                 {
                     Console.Write($"{i++}) ");
-                    Console.WriteLine(string.Join(" ", row));
+                    if (row == null || row.Length == 0)
+                    {
+                        Console.WriteLine("Пустий рядок");
+                    }
+                    else
+                    {
+                        Console.WriteLine(string.Join(" ", row));
+                    }
                 }
                 PressAnyKeyToContinue();
                 break;
 
-            default:
+            default: // Рудимент коду. Залишено "про всяк випадок"
                 WriteColoredLine("Невірний вибір!", ConsoleColor.Red);
                 PressAnyKeyToContinue();
                 break;
         }
     }
+
+    // Методи для виведення тексту в консоль певним кольором
     public static void WriteColored(string text, ConsoleColor color)
     {
         Console.ForegroundColor = color;
         Console.Write(text);
         Console.ForegroundColor = ConsoleColor.White;
     }
+
     public static void WriteColoredLine(string text, ConsoleColor color)
     {
         Console.ForegroundColor = color;
         Console.WriteLine(text);
         Console.ForegroundColor = ConsoleColor.White;
     }
+
+    // Метод для очікування натискання будь-якої клавіші (як називається те й робить)
     public static void PressAnyKeyToContinue()
     {
         Console.Write("\nНатисніть будь-яку клавішу, щоб продовжити...");
