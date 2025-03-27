@@ -16,6 +16,7 @@ namespace Lab_Work_3
                 case 2: BlockTwo(); break;
             }
         }
+        // Блок 1
         private static void BlockOne()
         {
             Console.WriteLine("--- Завдання блоку 1, варіант 16 ---\n");
@@ -25,7 +26,7 @@ namespace Lab_Work_3
             Program.arrayData = AddOneBeforeEven(input);
             Program.ArrayStatus();
         }
-
+        // Додавання перед парними
         private static int[] AddOneBeforeEven(int[] arr)
         {
             int evenCount = 0;
@@ -51,6 +52,7 @@ namespace Lab_Work_3
             }
             return newArr;
         }
+        // Блок 2
         private static void BlockTwo()
         {
             Console.WriteLine("--- Завдання блоку 2, варіант 7 ---\n");
@@ -60,6 +62,7 @@ namespace Lab_Work_3
             Program.arrayData = RemoveEmptyRows(matrix);
             Program.ArrayStatus();
         }
+        // Видалення порожніх рядків
         private static int[][] RemoveEmptyRows(int[][] matrix)
         {
             return matrix.Where(row => row != null && row.Length > 0).ToArray();
