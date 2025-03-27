@@ -136,7 +136,6 @@ class Program
             case 3:
                 Console.Clear();
                 KormanProgram.Start();
-                PressAnyKeyToContinue();
                 break;
 
             case 9:
@@ -173,9 +172,9 @@ class Program
                 foreach (var row in (int[][])Program.arrayData ?? Array.Empty<int[]>())
                 {
                     Console.Write($"{i++}) ");
-                    if (row == null)
+                    if (row == null || row.Length == 0)
                     {
-                        Console.WriteLine("null");
+                        Console.WriteLine("Пустий рядок");
                     }
                     else
                     {
