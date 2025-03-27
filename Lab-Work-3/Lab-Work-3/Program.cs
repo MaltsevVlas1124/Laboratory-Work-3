@@ -15,7 +15,7 @@ class Program
         Console.ForegroundColor = ConsoleColor.White;
         BlockChoice();
     }
-
+    // Метод вибору блоку для виконання
     public static void BlockChoice()
     {
         while (true)
@@ -44,7 +44,7 @@ class Program
             }
         }
     }
-
+    // Метод вибору типу введення масиву
     public static void ArrayInputChoiceType()
     {
         while (true)
@@ -92,7 +92,7 @@ class Program
             }
         }
     }
-
+    // Метод вибору студентського варіанту
     public static void StudentChoice()
     {
         while (true)
@@ -118,7 +118,7 @@ class Program
             ProcessChoice(choice);
         }
     }
-
+    // Метод обробки вибору студентського варіанту
     public static void ProcessChoice(int choice)
     {
         switch (choice)
@@ -155,7 +155,7 @@ class Program
                 break;
         }
     }
-
+    // Метод виведення статусу масиву
     public static void ArrayStatus()
     {
         switch (blockNum)

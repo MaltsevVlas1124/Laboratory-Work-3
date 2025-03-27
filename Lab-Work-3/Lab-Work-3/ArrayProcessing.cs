@@ -8,6 +8,7 @@ namespace Lab_Work_3
 {
     class ArrayProcessing
     {
+        // Метод обробки вибору типу введення масиву
         public static void ArrayInput(int inputChoice)
         {
             switch ((Program.blockNum, inputChoice))
@@ -18,6 +19,7 @@ namespace Lab_Work_3
                 case (2, 2): Program.arrayData = GenerateTwoDimArray(); Console.Clear(); Program.ArrayStatus(); Program.StudentChoice(); break;
             }   
         }
+        // Метод генерації одновимірного масиву
         public static object GenereteOneDimArray()
         {
             Random random = new Random();
@@ -29,6 +31,7 @@ namespace Lab_Work_3
             }
             return oneDimArray;
         }
+        // Метод генерації двовимірного масиву
         public static object GenerateTwoDimArray()
         {
             Random random = new Random();
@@ -54,7 +57,7 @@ namespace Lab_Work_3
             }
             return twoDimArray;
         }
-
+        // Метод введення одновимірного масиву
         static int[] InputOneDimArray()
         {
             int[] oneDimArray;
@@ -81,7 +84,7 @@ namespace Lab_Work_3
             }
             return oneDimArray;
         }
-
+        // Метод введення двовимірного масиву
         static int[][] InputTwoDimArray()
         {
             Console.Write("Введіть кількість рядків у масиві: ");
