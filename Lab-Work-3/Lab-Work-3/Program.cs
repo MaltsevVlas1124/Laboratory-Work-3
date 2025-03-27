@@ -40,7 +40,7 @@ class Program
             {
                 case 1: Console.Clear(); ArrayInputChoiceType(); break;
                 case 2: Console.Clear(); ArrayInputChoiceType(); break;
-                case 0: Console.Clear(); Console.Write("Роботу програми завершено.\n"); Thread.Sleep(1500); Environment.Exit(0); break;
+                case 0: Console.Clear(); Console.WriteLine("Роботу програми завершено."); Thread.Sleep(1500); Environment.Exit(0); break;
             }
         }
     }
