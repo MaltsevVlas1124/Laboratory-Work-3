@@ -20,6 +20,9 @@ namespace Lab_Work_3
         }
         private static void DoBlock_1()
         {
+            Console.WriteLine("--- Завдання блоку 1, варіант 13 ---\n");
+            Console.WriteLine("Заміна кожного максимума (якщо парний) двома їхніми половинами\n");
+
             int[] array = (int[])Program.arrayData;
             ProcessArray(ref array);
             Program.ArrayStatus();
@@ -103,6 +106,9 @@ namespace Lab_Work_3
         
         private static void DoBlock_2()
         {
+            Console.WriteLine("--- Завдання блоку 2, задача 2 ---\n");
+            Console.WriteLine("Додавання К рядків у початок (угору) зубчастого масиву.\n");
+
             int[][] jaggedArray = (int[][])Program.arrayData;
             ProcessEmptyRows(jaggedArray);
             Console.Clear();
@@ -124,6 +130,31 @@ namespace Lab_Work_3
                 break;
             }
             int[][] newRows = new int[k][];
+            Console.Clear();
+            while (true)
+            {
+                Console.WriteLine(@"Чи бажаєте заповнити нові рядки?
+
+1. Так
+2. Ні
+");
+                Console.Write("Ваш вибір: ");
+                if (!int.TryParse(Console.ReadLine(), out int choice) || choice < 1 || choice > 2)
+                {
+                    Console.Clear();
+                    Program.WriteColoredLine("Некоректний вибір, спробуйте ще раз.\n", ConsoleColor.Red);
+                    continue;
+                }
+                switch (choice)
+                { 
+                    case 1: FillNewRows(k, jaggedArray, newRows); break;
+                    case 2: Program.arrayData = InsertKRowsAtTop(jaggedArray, newRows); break;
+                }
+                break;
+            }
+        }
+            private static void FillNewRows(int k, int[][] jaggedArray, int[][] newRows)
+        {
             for (int i = 0; i < k; i++)
             {
                 Console.Clear();
@@ -132,7 +163,7 @@ namespace Lab_Work_3
                     Console.WriteLine($"Введіть рядок {i + 1} (розділяйте числа пробілами):");
                     try
                     {
-                        newRows[i] = Array.ConvertAll(Console.ReadLine().Split(" \t".ToCharArray()), int.Parse);
+                        newRows[i] = Array.ConvertAll(Console.ReadLine().Split(new char[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries), int.Parse);
                         break;
                     }
                     catch
@@ -144,9 +175,7 @@ namespace Lab_Work_3
                 }
             }
             // Вставляємо нові рядки на початок масиву
-            int[][] result = InsertKRowsAtTop(jaggedArray, newRows);
-            // Оновлюємо глобальний масив
-            Program.arrayData = result;
+            Program.arrayData = InsertKRowsAtTop(jaggedArray, newRows);
         }
 
         //Метод вставки К рядків наперед 

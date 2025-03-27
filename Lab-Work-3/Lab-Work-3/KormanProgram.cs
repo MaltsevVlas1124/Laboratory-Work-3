@@ -20,7 +20,7 @@ namespace Lab_Work_3
 
         public static void DoBlock1()
         {
-            Console.WriteLine("--- Завдання блоку 1, задача 10 ---\n");
+            Console.WriteLine("--- Завдання блоку 1, варіант 10 ---\n");
             Console.WriteLine("Видалення елементів між першим мінімальним та останнім максимальним елементами.\n");
 
             int[] array = (int[])Program.arrayData;
