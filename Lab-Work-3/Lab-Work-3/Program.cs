@@ -48,34 +48,34 @@ class Program
     {
         while (true)
         {
-            if(blockNum == 1)
+            if (blockNum == 1)
             {
                 Console.WriteLine(@"Оберіть тип введення масиву:
 
-1. Заповнити вручну (через пробіл)
-2. Згенерувати випадковим чином:
+    1. Заповнити вручну (через пробіл)
+    2. Згенерувати випадковим чином:
 
-   Розмір символів: від -100 до 100
-   Кількість символів: від 5 до 20 
+       Розмір символів: від -100 до 100
+       Кількість символів: від 5 до 20 
 
-0. Повернутися до вибору блоку
-");
+    0. Повернутися до вибору блоку
+    ");
             }
-            else if (blockNum == 2) 
+            else if (blockNum == 2)
             {
                 Console.WriteLine(@"Оберіть тип введення масиву:
 
-1. Заповнити вручну (через пробіл)
-2. Згенерувати випадковим чином:
+    1. Заповнити вручну (через пробіл)
+    2. Згенерувати випадковим чином:
 
-   Розмір символів: від -100 до 100
-   Кількість рядків: від 2 до 10
-   Кількість символів в одному рядку: від 5 до 20 
+       Розмір символів: від -100 до 100
+       Кількість рядків: від 2 до 10
+       Кількість символів в одному рядку: від 0 до 20 (20% шанс створення пустого рядка)
 
-0. Повернутися до вибору блоку
-");
+    0. Повернутися до вибору блоку
+    ");
             }
-            
+
             Console.Write("Ваш вибір: ");
             if (!int.TryParse(Console.ReadLine(), out int inputChoice) || (inputChoice < 0 || inputChoice > 2))
             {
@@ -124,7 +124,6 @@ class Program
             case 1:
                 Console.Clear();
                 MaltsevProgram.Start();
-                PressAnyKeyToContinue();
                 break;
 
             case 2:
@@ -167,10 +166,17 @@ class Program
             case 2:
                 int i = 1;
                 Console.WriteLine("Вигляд двовимірного масиву:\n");
-                foreach (var row in (int[][])Program.arrayData)
+                foreach (var row in (int[][])Program.arrayData ?? Array.Empty<int[]>())
                 {
                     Console.Write($"{i++}) ");
-                    Console.WriteLine(string.Join(" ", row));
+                    if (row == null)
+                    {
+                        Console.WriteLine("null");
+                    }
+                    else
+                    {
+                        Console.WriteLine(string.Join(" ", row));
+                    }
                 }
                 PressAnyKeyToContinue();
                 break;
