@@ -15,6 +15,7 @@ class Program
         Console.ForegroundColor = ConsoleColor.White;
         BlockChoice();
     }
+
     public static void BlockChoice()
     {
         while (true)
@@ -91,16 +92,16 @@ class Program
             }
         }
     }
-   
+
     public static void StudentChoice()
     {
-            while (true)
+        while (true)
         {
             Console.WriteLine(@"Оберіть дію:
 
-1. Виконати файл Мальцева Власа
-2. Виконати файл Лавріненко Олександри
-3. Виконати файл Кормана Романа
+1. Виконати варіант Мальцева Власа
+2. Виконати варіант Лавріненко Олександри
+3. Виконати варіант Кормана Романа
 
 9. Вивести статус масиву
 
@@ -117,6 +118,7 @@ class Program
             ProcessChoice(choice);
         }
     }
+
     public static void ProcessChoice(int choice)
     {
         switch (choice)
@@ -137,9 +139,9 @@ class Program
                 PressAnyKeyToContinue();
                 break;
 
-            case 9: 
-                Console.Clear(); 
-                ArrayStatus(); 
+            case 9:
+                Console.Clear();
+                ArrayStatus();
                 break;
 
             case 0:
@@ -147,12 +149,14 @@ class Program
                 ArrayInputChoiceType();
                 break;
 
-            default:
+
+            default: // Рудимент коду. Залишено "про всяк випадок"
                 Console.Clear();
                 WriteColoredLine("Невірний вибір!", ConsoleColor.Red);
                 break;
         }
     }
+
     public static void ArrayStatus()
     {
         switch (blockNum)
@@ -181,24 +185,29 @@ class Program
                 PressAnyKeyToContinue();
                 break;
 
-            default:
+            default: // Рудимент коду. Залишено "про всяк випадок"
                 WriteColoredLine("Невірний вибір!", ConsoleColor.Red);
                 PressAnyKeyToContinue();
                 break;
         }
     }
+
+    // Методи для виведення тексту в консоль певним кольором
     public static void WriteColored(string text, ConsoleColor color)
     {
         Console.ForegroundColor = color;
         Console.Write(text);
         Console.ForegroundColor = ConsoleColor.White;
     }
+
     public static void WriteColoredLine(string text, ConsoleColor color)
     {
         Console.ForegroundColor = color;
         Console.WriteLine(text);
         Console.ForegroundColor = ConsoleColor.White;
     }
+
+    // Метод для очікування натискання будь-якої клавіші (як називається те й робить)
     public static void PressAnyKeyToContinue()
     {
         Console.Write("\nНатисніть будь-яку клавішу, щоб продовжити...");
