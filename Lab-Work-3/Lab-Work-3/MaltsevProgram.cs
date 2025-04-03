@@ -22,8 +22,7 @@ namespace Lab_Work_3
             Console.WriteLine("--- Завдання блоку 1, варіант 16 ---\n");
             Console.WriteLine("Додавання '1' перед кожним парним елементом.\n");
 
-            int[] input = (int[])Program.arrayData;
-            Program.arrayData = AddOneBeforeEven(input);
+            Program.arrayData = AddOneBeforeEven((int[])Program.arrayData);
             Program.ArrayStatus();
         }
         // Додавання перед парними
@@ -57,16 +56,14 @@ namespace Lab_Work_3
         {
             Console.WriteLine("--- Завдання блоку 2, варіант 7 ---\n");
             Console.WriteLine("Знищування всіх порожніх рядків\n");
-
-            int[][] matrix = (int[][])Program.arrayData;
-            Program.arrayData = RemoveEmptyRows(matrix);
+            Program.arrayData = RemoveEmptyRows((int[][])Program.arrayData);
             Program.ArrayStatus();
         }
         // Видалення порожніх рядків
-        private static int[][] RemoveEmptyRows(int[][] matrix)
-        {
-            return matrix.Where(row => row != null && row.Length > 0).ToArray();
-        }
+        //private static int[][] RemoveEmptyRows(int[][] matrix)
+        //{
+        //    return (matrix).Where(row => row != null && row.Length > 0).ToArray();
+        //}
 
         //public static int[][] RemoveEmptyRows(int[][] matrix)
         //{
@@ -80,5 +77,32 @@ namespace Lab_Work_3
         //    }
         //    return result.ToArray();
         //}
+
+        private static int[][] RemoveEmptyRows(int[][] matrix)
+        {
+            int count = 0;
+            for (int i = 0; i < matrix.Length; i++)
+            {
+                if (matrix[i] != null && matrix[i].Length > 0)
+                {
+                    count++;
+                }
+            }
+
+            int[][] newMatrix = new int[count][];
+            int index = 0;
+
+            for (int i = 0; i < matrix.Length; i++)
+            {
+                if (matrix[i] != null && matrix[i].Length > 0)
+                {
+                    newMatrix[index] = matrix[i];
+                    index++;
+                }
+            }
+
+            return newMatrix;
+        }
+
     }
 }
