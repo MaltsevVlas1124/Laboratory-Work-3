@@ -5,7 +5,7 @@ using System.Threading;
 
 class Program
 {
-    public static object? arrayData = null;
+    public static object? arrayData;
     public static int blockNum;
     public static void Main()
     {
@@ -148,7 +148,6 @@ class Program
                 ArrayInputChoiceType();
                 break;
 
-
             default: // Рудимент коду. Залишено "про всяк випадок"
                 Console.Clear();
                 WriteColoredLine("Невірний вибір!", ConsoleColor.Red);
@@ -162,14 +161,14 @@ class Program
         {
             case 1:
                 Console.WriteLine("Вигляд одновимірного масиву:\n");
-                Console.WriteLine(string.Join(" ", (int[])Program.arrayData));
+                Console.WriteLine(string.Join(" ", (int[])arrayData));
                 PressAnyKeyToContinue();
                 break;
 
             case 2:
                 int i = 1;
                 Console.WriteLine("Вигляд двовимірного масиву:\n");
-                foreach (var row in (int[][])Program.arrayData ?? Array.Empty<int[]>())
+                foreach (var row in (int[][])arrayData ?? Array.Empty<int[]>())
                 {
                     Console.Write($"{i++}) ");
                     if (row == null || row.Length == 0)

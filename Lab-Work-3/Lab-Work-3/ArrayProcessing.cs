@@ -100,13 +100,6 @@ namespace Lab_Work_3
             {
                 Console.WriteLine($"\nВведіть елементи для рядка {i + 1} через пробіл:");
                 string input = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(input))
-                {
-                    Console.Clear();
-                    Program.WriteColoredLine("Рядок пустий, спробуйте ще раз.\n", ConsoleColor.Red);
-                    i--;
-                    continue;
-                }
                 try
                 {
                     twoDimArray[i] = Array.ConvertAll(input.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries), int.Parse);
