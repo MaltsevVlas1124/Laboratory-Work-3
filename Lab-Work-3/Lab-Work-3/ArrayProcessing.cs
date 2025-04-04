@@ -14,7 +14,7 @@ namespace Lab_Work_3
             switch ((Program.blockNum, inputChoice))
             {
                 case (1, 1): Program.arrayData = InputOneDimArray(); Console.Clear(); Program.StudentChoice(); break;
-                case (2, 1): Program.arrayData = InputTwoDimArray(); Console.Clear(); Program.StudentChoice(); break;
+                case (2, 1): Program.arrayData = RowsCountChoice(); Console.Clear(); Program.StudentChoice(); break;
                 case (1, 2): Program.arrayData = GenereteOneDimArray(); Console.Clear(); Program.ArrayStatus(); Program.StudentChoice(); break;
                 case (2, 2): Program.arrayData = GenerateTwoDimArray(); Console.Clear(); Program.ArrayStatus(); Program.StudentChoice(); break;
             }
@@ -84,21 +84,32 @@ namespace Lab_Work_3
             }
             return oneDimArray;
         }
-        // Метод введення двовимірного масиву  
-        static int[][] InputTwoDimArray()
-        {
-            Console.Write("Введіть кількість рядків у масиві: ");
-            if (!int.TryParse(Console.ReadLine(), out int rowsCount) || rowsCount < 0)
-            {
-                Console.Clear();
-                Program.WriteColoredLine("Некоректний ввід, спробуйте ще раз.\n", ConsoleColor.Red);
-                return InputTwoDimArray();
-            }
 
+        public static int[][] RowsCountChoice()
+        {
+            int rowsCount;
+            while (true)
+            {
+                Console.Write("Введіть кількість рядків у масиві: ");
+                if (!int.TryParse(Console.ReadLine(), out rowsCount) || rowsCount < 0)
+                {
+                    Console.Clear();
+                    Program.WriteColoredLine("Некоректний ввід, спробуйте ще раз.\n", ConsoleColor.Red);
+                    continue;
+                }
+                break;
+            }
+            return InputTwoDimArray(rowsCount);
+        }
+
+        // Метод введення двовимірного масиву  
+        public static int[][] InputTwoDimArray(int rowsCount)
+        {
             int[][] twoDimArray = new int[rowsCount][];
             for (int i = 0; i < rowsCount; i++)
             {
-                Console.WriteLine($"\nВведіть елементи для рядка {i + 1} через пробіл:");
+                Console.Clear();
+                Console.WriteLine($"Введіть елементи для рядка {i + 1} через пробіл:");
                 string input = Console.ReadLine();
                 try
                 {
