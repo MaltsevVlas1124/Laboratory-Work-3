@@ -121,7 +121,7 @@ namespace Lab_Work_3
             while (true)
             {
                 Console.WriteLine("Скільки рядків додати на початок?");
-                if (!int.TryParse(Console.ReadLine(), out k))
+                if (!int.TryParse(Console.ReadLine(), out k) || k < 0)
                 {
                     Console.Clear();
                     Program.WriteColoredLine("Некоректний ввід, спробуйте ще раз.\n", ConsoleColor.Red);
