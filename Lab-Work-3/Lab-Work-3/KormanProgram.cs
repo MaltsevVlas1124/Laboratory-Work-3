@@ -88,15 +88,8 @@ namespace Lab_Work_3
 
         }
 
-        //// Отримуємо матрицю з Program.arrayData, приводячи її до типу int[][]
         //public static int[][] RemoveRowsContainingZero(int[][] jagged)
         //{
-        //    if (jagged == null)
-        //    {
-        //        return new int[0][];
-        //    }
-
-        //    // Створюємо список для зберігання рядків, які не містять нульові елементи
         //    var result = new System.Collections.Generic.List<int[]>();
 
         //    foreach (var row in jagged)
@@ -112,14 +105,14 @@ namespace Lab_Work_3
 
         public static int[][] RemoveRowsContainingZero(int[][] jagged)
         {
-            int RowCount = 0;
+            int rowCount = 0;
             for (int i = 0; i < jagged.Length; i++)
             {
                 int[] currentRow = jagged[i];
 
                 if (currentRow == null || currentRow.Length == 0)
                 {
-                    RowCount++;
+                    rowCount++;
                     continue;
                 }
 
@@ -136,11 +129,11 @@ namespace Lab_Work_3
 
                 if (!containsZero)
                 {
-                    RowCount++;
+                    rowCount++;
                 }
             }
 
-            int[][] resultMatrix = new int[RowCount][];
+            int[][] resultMatrix = new int[rowCount][];
 
             int resultRowIndex = 0;
             for (int i = 0; i < jagged.Length; i++)
@@ -149,7 +142,7 @@ namespace Lab_Work_3
 
                 if (currentRow == null || currentRow.Length == 0)
                 {
-                    if (resultRowIndex < RowCount)
+                    if (resultRowIndex < rowCount)
                     {
                         resultMatrix[resultRowIndex] = currentRow;
                         resultRowIndex++;
@@ -169,7 +162,7 @@ namespace Lab_Work_3
 
                 if (!containsZero)
                 {
-                    if (resultRowIndex < RowCount)
+                    if (resultRowIndex < rowCount)
                     {
                         resultMatrix[resultRowIndex] = currentRow;
                         resultRowIndex++;
