@@ -121,7 +121,7 @@ namespace Lab_Work_3
             while (true)
             {
                 Console.WriteLine("Скільки рядків додати на початок?");
-                if (!int.TryParse(Console.ReadLine(), out k))
+                if (!int.TryParse(Console.ReadLine(), out k) || k < 0)
                 {
                     Console.Clear();
                     Program.WriteColoredLine("Некоректний ввід, спробуйте ще раз.\n", ConsoleColor.Red);
@@ -137,7 +137,7 @@ namespace Lab_Work_3
 
 1. Так
 2. Ні
-            ");
+");
                 Console.Write("Ваш вибір: ");
                 if (!int.TryParse(Console.ReadLine(), out int choice) || choice < 1 || choice > 2)
                 {
@@ -148,37 +148,38 @@ namespace Lab_Work_3
                 switch (choice)
                 {
                     case 1:
-                        FillNewRows(k, newRows);
+                        newRows = ArrayProcessing.InputTwoDimArray(k); // Виклик методу InputTwoDimArray з файлу ArrayProcessing.cs
                         return InsertKRowsAtTop(jaggedArray, newRows);
-                    case 2: return InsertKRowsAtTop(jaggedArray, newRows);
+                    case 2:
+                        return InsertKRowsAtTop(jaggedArray, newRows);
                 }
             }
         }
 
-        private static void FillNewRows(int k, int[][] newRows)
-        {
-            for (int i = 0; i < k; i++)
-            {
-                while (true)
-                {
-                    Console.Clear();
-                    Console.WriteLine($"Введіть рядок {i + 1} (розділяйте числа пробілами):");
-                    try
-                    {
-                        string input = Console.ReadLine();
-                                                                                         //порожні значення буде видалено
-                        newRows[i] = Array.ConvertAll(input.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries), int.Parse);
-                        break;
-                    }
-                    catch
-                    {
-                        Console.Clear();
-                        Program.WriteColoredLine("Некоректний ввід, спробуйте ще раз.\n", ConsoleColor.Red);
-                        continue;
-                    }
-                }
-            }
-        }
+        //private static void FillNewRows(int k, int[][] newRows)
+        //{
+        //    for (int i = 0; i < k; i++)
+        //    {
+        //        while (true)
+        //        {
+        //            Console.Clear();
+        //            Console.WriteLine($"Введіть рядок {i + 1} (розділяйте числа пробілами):");
+        //            try
+        //            {
+        //                string input = Console.ReadLine();
+        //                                                                                 //порожні значення буде видалено
+        //                newRows[i] = Array.ConvertAll(input.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries), int.Parse);
+        //                break;
+        //            }
+        //            catch
+        //            {
+        //                Console.Clear();
+        //                Program.WriteColoredLine("Некоректний ввід, спробуйте ще раз.\n", ConsoleColor.Red);
+        //                continue;
+        //            }
+        //        }
+        //    }
+        //}
 
         //Метод вставки К рядків наперед 
         private static int[][] InsertKRowsAtTop(int[][] jaggedArray, int[][] newRows)
